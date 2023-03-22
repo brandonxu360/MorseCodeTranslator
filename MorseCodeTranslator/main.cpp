@@ -10,9 +10,15 @@
 
 int main(void) {
 
-	BST<std::string, std::string> newTree("MorseTable.txt");
+	BST<char, std::string> newTree("MorseTable.txt");
 
-	newTree.recursivePrintInOrder();
+	//newTree.recursivePrintInOrder();
+
+	/*char target = 'S';
+	BSTNode<char, std::string>* result = newTree.search(target);
+	std::cout << *result;*/
+
+	newTree.translate("Convert.txt");
 
 	return 0;
 }

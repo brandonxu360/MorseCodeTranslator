@@ -34,5 +34,8 @@
     <Text Include="MorseTable.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Convert.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
