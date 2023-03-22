@@ -28,6 +28,9 @@ public:
 
 	// Recursive step to be used in recursivePrintInOrder method
 	void recursivePrintStep(BSTNode<T, U>* pCurrNode);
+	
+	// Print full binary tree structure
+	void printTreeStructure();
 
 	// Search for a node in the BST containing the target (of type T) and return a pointer to that node
 	BSTNode<T, U>* search(T& target);
@@ -139,6 +142,30 @@ void BST<T, U>::recursivePrintStep(BSTNode<T, U>* pCurrNode) {
 	if (pCurrNode->getPRightChild() != nullptr) { // Right child: EXISTS, left child: DOES NOT EXIST
 		recursivePrintStep(pCurrNode->getPRightChild()); // Move to right child node
 	}
+}
+
+// Print full tree in binary stree structure
+template <class T, class U>
+void BST<T, U>::printTreeStructure() {
+	recursiveTreePrintStep(_rootNode, 0);
+}
+
+// Recursive step for printTreeStructure method
+template <class T, class U>
+void BST<T, U>::recursiveTreePrintStep(BSTNode<T, U>* pCurrNode, int level) {
+
+	if (pCurrNode == nullptr) return; // Exit step if current node is null
+
+	recursiveTreePrintStep(pCurrNode->getPRightChild(), level + 1); // Print right subtree/node first
+
+	// Print current node in the middle of the right and left subtrees/nodes
+	for (int i = 0; i < level; i++) { // Apply increment depending on level
+		std::cout << "   |  ";
+	}
+	std::cout << pCurrNode->getKey() << std::endl; // Print current node after proper indentation
+
+	recursiveTreePrintStep(pCurrNode->getPLeftChild(), level + 1); // Print left subtree/node
+	
 }
 
 // Search for a node in the BST containing the target (of type T) and return a pointer to that node (nullptr if not found)
