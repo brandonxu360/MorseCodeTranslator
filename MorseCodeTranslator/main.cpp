@@ -14,6 +14,8 @@ int main(void) {
 
 	//newTree.recursivePrintInOrder();
 
+	newTree.printTreeStructure();
+
 	/*char target = 'S';
 	BSTNode<char, std::string>* result = newTree.search(target);
 	std::cout << *result;*/

@@ -19,6 +19,12 @@ public:
 	// * one key-value pair per line sepearted by a space (which is the delimiter)
 	BST(std::string fileName);
 
+	// Destructor
+	~BST(); 
+
+	// Recursive delete node step used in destructor
+	void recursiveDeleteStep(BSTNode<T, U>* node);
+
 	// PRECONDITION: There are no duplicate keys - all keys are unique and thus must be greater than or less than each other, never equal
 	// NOTE: BST structure is dictated by the keys, not the values (ie. left children are less than and right children and greater than)
 	void insert(BSTNode<T, U>* pNewNode);
@@ -28,6 +34,9 @@ public:
 
 	// Recursive step to be used in recursivePrintInOrder method
 	void recursivePrintStep(BSTNode<T, U>* pCurrNode);
+
+	// Recursive step for printTreeStructure method
+	void recursiveTreePrintStep(BSTNode<T, U>* pCurrNode, int level);
 	
 	// Print full binary tree structure
 	void printTreeStructure();
@@ -80,6 +89,23 @@ BST<T, U>::BST(std::string fileName) { // Constructor that builds a BST object b
 
 	// Close file
 	file.close();
+}
+
+// Destructor
+template <class T, class U>
+BST<T, U>::~BST() {
+	if (_rootNode != nullptr) recursiveDeleteStep(_rootNode);
+}
+
+// Recursive delete node step used in the destructor
+template <class T, class U>
+void BST<T, U>::recursiveDeleteStep(BSTNode<T, U>* node) {
+
+	// Use post-order traversal to delete nodes bottom up (children first, then parent)
+	if (node->getPLeftChild() != nullptr) recursiveDeleteStep(node->getPLeftChild());
+	if (node->getPRightChild() != nullptr) recursiveDeleteStep(node->getPRightChild());
+	std::cout << "Deleting node containing key: " << node->getKey() << std::endl;
+	delete node;
 }
 
 // PRECONDITION: There are no duplicate keys - all keys are unique and thus must be greater than or less than each other, never equal
